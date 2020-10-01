@@ -1,7 +1,7 @@
 <template>
     <div class='container py-4'>
         <div class='row justify-content-center'>
-            <div class='col-md-8'>
+            <div class='col-xl-12 col-lg-12'>
             <div class='card'>
                 <div class='card-header'>All Article</div>
                 <div class='card-body'>
@@ -13,14 +13,22 @@
                             <thead>
                                 <tr>
                                     <th width="50" class="text-center">No</th>
+                                    <th>Tanggal</th>
                                     <th>Title</th>
+                                    <th>Content</th>
+                                    <th>Agent</th>
+                                    <th>Lokasi</th>
                                     <th width="200" class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(article, index) in articles.data" :key="article.id">
                                     <td width="50" class="text-center">{{ index + 1 }}</td>
+                                    <td>{{ article.report_date }}</td>
                                     <td>{{ article.title }}</td>
+                                    <td>{{ article.content }}</td>
+                                    <td>{{ article.agent }}</td>
+                                    <td>{{ article.lokasi }}</td>
                                     <td width="200" class="text-center">
                                         <div class="btn-group">
                                             <router-link :to="{name: 'show', params: { id: article.id }}" class="btn btn-primary">Detail</router-link>

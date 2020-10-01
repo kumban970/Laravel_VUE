@@ -1944,20 +1944,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       article: {},
       errors: [],
       title: null,
-      content: null
+      content: null,
+      report_date: null,
+      agent: null,
+      lokasi: null
     };
   },
   methods: {
     createArticle: function createArticle(e) {
       var _this = this;
 
-      if (this.$data.article.title != null && this.$data.article.content != null) {
+      if (this.$data.article.title != null && this.$data.article.content != null && this.$data.article.report_date != null && this.$data.article.lokasi != null && this.$data.article.agent != null) {
         this.$swal.fire({
           title: 'Success',
           text: "Article created successfully",
@@ -1981,6 +1997,18 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!this.content) {
         this.errors.push('Content wajib diisi !');
+      }
+
+      if (!this.report_date) {
+        this.errors.push('Date report wajib diisi !');
+      }
+
+      if (!this.lokasi) {
+        this.errors.push('Lokasi wajib diisi !');
+      }
+
+      if (!this.agent) {
+        this.errors.push('Agent wajib diisi !');
       }
 
       e.preventDefault();
@@ -2035,13 +2063,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       article: {},
       errors: [],
       title: null,
-      content: null
+      content: null,
+      report_date: null,
+      agent: null,
+      lokasi: null
     };
   },
   created: function created() {
@@ -2056,14 +2099,14 @@ __webpack_require__.r(__webpack_exports__);
     updateArticle: function updateArticle(e) {
       var _this2 = this;
 
-      if (this.$data.article.title != null && this.$data.article.content != null) {
+      if (this.$data.article.title != null && this.$data.article.content != null && this.$data.article.report_date != null && this.$data.article.lokasi != null && this.$data.article.agent != null) {
         this.$swal.fire({
           title: 'Success',
           text: "Article created successfully",
           icon: 'success',
           timer: 1000
         });
-        var uri = "/api/article/update/".concat(this.$route.params.id);
+        var uri = '/api/article/update/${this.$route.params.id}';
         this.axios.put(uri, this.article).then(function (response) {
           _this2.$router.push({
             name: 'home'
@@ -2140,6 +2183,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2147,10 +2198,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.getResult();
+    this.getResults();
   },
   methods: {
-    getResult: function getResult(page) {
+    getResults: function getResults(page) {
       var _this = this;
 
       var uri = 'api/articles?page=' + page;
@@ -2205,6 +2256,27 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -42335,6 +42407,38 @@ var render = function() {
               [
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", { attrs: { htmlFor: "title" } }, [
+                    _vm._v("Date Report")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.article.report_date,
+                        expression: "article.report_date"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "report_date" },
+                    domProps: { value: _vm.article.report_date },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.article,
+                          "report_date",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { htmlFor: "title" } }, [
                     _vm._v("Title")
                   ]),
                   _vm._v(" "),
@@ -42384,6 +42488,62 @@ var render = function() {
                           return
                         }
                         _vm.$set(_vm.article, "content", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { htmlFor: "content" } }, [
+                    _vm._v("Lokasi")
+                  ]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.article.lokasi,
+                        expression: "article.lokasi"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "lokasi", rows: "5" },
+                    domProps: { value: _vm.article.lokasi },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.article, "lokasi", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { htmlFor: "content" } }, [
+                    _vm._v("Agent")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.article.agent,
+                        expression: "article.agent"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "agent", rows: "5" },
+                    domProps: { value: _vm.article.agent },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.article, "agent", $event.target.value)
                       }
                     }
                   })
@@ -42474,6 +42634,38 @@ var render = function() {
               [
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", { attrs: { htmlFor: "title" } }, [
+                    _vm._v("Date Report")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.article.report_date,
+                        expression: "article.report_date"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "report_date" },
+                    domProps: { value: _vm.article.report_date },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.article,
+                          "report_date",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { htmlFor: "title" } }, [
                     _vm._v("Title")
                   ]),
                   _vm._v(" "),
@@ -42528,6 +42720,62 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { htmlFor: "content" } }, [
+                    _vm._v("Lokasi")
+                  ]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.article.lokasi,
+                        expression: "article.lokasi"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "lokasi", rows: "5" },
+                    domProps: { value: _vm.article.lokasi },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.article, "lokasi", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { htmlFor: "content" } }, [
+                    _vm._v("Agent")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.article.agent,
+                        expression: "article.agent"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "agent", rows: "5" },
+                    domProps: { value: _vm.article.agent },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.article, "agent", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
                 _c(
                   "div",
                   { staticClass: "form-group" },
@@ -42544,7 +42792,7 @@ var render = function() {
                       "\n                             \n                             \n                            "
                     ),
                     _c("button", { staticClass: "btn btn-primary" }, [
-                      _vm._v("Create")
+                      _vm._v("Save")
                     ])
                   ],
                   1
@@ -42581,7 +42829,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container py-4" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
+      _c("div", { staticClass: "col-xl-12 col-lg-12" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [_vm._v("All Article")]),
           _vm._v(" "),
@@ -42622,7 +42870,15 @@ var render = function() {
                             [_vm._v(_vm._s(index + 1))]
                           ),
                           _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(article.report_date))]),
+                          _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(article.title))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(article.content))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(article.agent))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(article.lokasi))]),
                           _vm._v(" "),
                           _c(
                             "td",
@@ -42690,7 +42946,7 @@ var render = function() {
               _vm._v(" "),
               _c("pagination", {
                 attrs: { data: _vm.articles },
-                on: { "pagination-change-page": _vm.getResult }
+                on: { "pagination-change-page": _vm.getResults }
               })
             ],
             1
@@ -42711,7 +42967,15 @@ var staticRenderFns = [
           _vm._v("No")
         ]),
         _vm._v(" "),
+        _c("th", [_vm._v("Tanggal")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Title")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Content")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Agent")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Lokasi")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center", attrs: { width: "200" } }, [
           _vm._v("Action")
@@ -42743,35 +43007,25 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container py-4" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-6" }, [
+      _c("div", { staticClass: "col-md-8" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [_vm._v("Detail Article")]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { htmlFor: "title" } }, [_vm._v("Title")]),
+              _c("label", { attrs: { htmlFor: "content" } }, [_vm._v("Date")]),
               _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.article.title,
-                    expression: "article.title"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", id: "title", disabled: "" },
-                domProps: { value: _vm.article.title },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.article, "title", $event.target.value)
-                  }
-                }
-              })
+              _c("br"),
+              _vm._v(" "),
+              _c("span", [_vm._v(" " + _vm._s(_vm.article.report_date) + " ")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { htmlFor: "content" } }, [_vm._v("Title")]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("span", [_vm._v(" " + _vm._s(_vm.article.title) + " ")])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
@@ -42779,27 +43033,27 @@ var render = function() {
                 _vm._v("Content")
               ]),
               _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.article.content,
-                    expression: "article.content"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", id: "content", rows: "5", disabled: "" },
-                domProps: { value: _vm.article.content },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.article, "content", $event.target.value)
-                  }
-                }
-              })
+              _c("br"),
+              _vm._v(" "),
+              _c("span", [_vm._v(" " + _vm._s(_vm.article.content) + " ")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { htmlFor: "content" } }, [_vm._v("Agent")]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("span", [_vm._v(" " + _vm._s(_vm.article.agent) + " ")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { htmlFor: "content" } }, [
+                _vm._v("Lokasi")
+              ]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("span", [_vm._v(" " + _vm._s(_vm.article.lokasi) + " ")])
             ]),
             _vm._v(" "),
             _c(
@@ -58428,8 +58682,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\laragon\www\belajar-laravel\blog_vue\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\laragon\www\belajar-laravel\blog_vue\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/mymac/Documents/Glidik/Test/crud_laravel_vue_js/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/mymac/Documents/Glidik/Test/crud_laravel_vue_js/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

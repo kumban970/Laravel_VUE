@@ -14,6 +14,10 @@
 
                         <form @submit.prevent="updateArticle">
                             <div class='form-group'>
+                                <label htmlFor='title'>Date Report</label>
+                                <input type="text" class="form-control" id="report_date" v-model="article.report_date">
+                            </div>
+                            <div class='form-group'>
                                 <label htmlFor='title'>Title</label>
                                 <input type="text" class="form-control" id="title" v-model="article.title">
                             </div>
@@ -22,10 +26,18 @@
                                 <textarea type="text" class="form-control" id="content" v-model="article.content" rows="5"></textarea>
                             </div>
                             <div class='form-group'>
+                                <label htmlFor='content'>Lokasi</label>
+                                <textarea type="text" class="form-control" id="lokasi" v-model="article.lokasi" rows="5"></textarea>
+                            </div>
+                            <div class='form-group'>
+                                <label htmlFor='content'>Agent</label>
+                                <input type="text" class="form-control" id="agent" v-model="article.agent" rows="5">
+                            </div>
+                            <div class='form-group'>
                                 <router-link :to="{ name: 'home' }" class="btn btn-secondary">Back</router-link>
                                 &nbsp;
                                 &nbsp;
-                                <button class='btn btn-primary'>Create</button>
+                                <button class='btn btn-primary'>Save</button>
                             </div>
                         </form>
                     </div>
@@ -42,6 +54,9 @@
             errors: [],
             title: null,
             content: null,
+            report_date: null,
+            agent: null,
+            lokasi: null,
         }
     },
     created() {
@@ -53,7 +68,13 @@
     methods: {
         updateArticle(e){
             
-            if (this.$data.article.title != null && this.$data.article.content != null) {
+            if (
+                 this.$data.article.title != null && 
+                    this.$data.article.content != null &&
+                    this.$data.article.report_date != null && 
+                    this.$data.article.lokasi != null && 
+                    this.$data.article.agent != null 
+                ) {
                 
                 this.$swal.fire({
                     title: 'Success',
@@ -61,7 +82,7 @@
                     icon: 'success',
                     timer: 1000
                 });
-                let uri = `/api/article/update/${this.$route.params.id}`;
+                let uri = '/api/article/update/${this.$route.params.id}';
                 this.axios.put(uri, this.article).then((response) => {
                     this.$router.push({name: 'home'});
                 });
